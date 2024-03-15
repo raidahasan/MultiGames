@@ -5,7 +5,7 @@ public class Space {
         space = string;
     }
 
-    public void setSpace(String string){ space =string; }
-    public String getSpace(){ return space; }
+    public void setSpace(String string) { space = string; }
+    public String getSpace() { return space; }
 
 }
