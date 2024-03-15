@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 
 public class BattleShip {
     private String player1;
@@ -9,6 +10,7 @@ public class BattleShip {
     private boolean hit = false;
     private boolean missed = false;
     private ArrayList<String> positions;
+    private String position;
 
     public BattleShip(String player1, String player2){
         this.player1 = player1;
@@ -20,6 +22,37 @@ public class BattleShip {
         return positions;
     }
 
+    public String getPosition(){
+        return position;
+    }
 
-    public void placeShip(int x, String)
-}
+    public void askPosition(){
+        Scanner scan = new Scanner(System.in);
+        System.out.print("Enter move (LETTER#): ");
+        position  = scan.nextLine();
+    }
+
+    public void placeShip(String position) {
+        positions.add(position);
+    }
+
+    public boolean occupiesPosition(String position) {
+        return positions.contains(position);
+    }
+
+
+
+    public void placeShip(Ship ship, String position) {
+        ship.placeShip(position);
+        ships.add(ship);
+    }
+
+    public boolean checkHit(String position) {
+        for (Ship ship : ships) {
+            if (ship.occupiesPosition(position)) {
+                ship.getPositions().remove(position);
+                return true;
+            }
+        }
+        return false;
+    }
