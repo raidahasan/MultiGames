@@ -12,7 +12,7 @@ public class BattleShip {
     private ArrayList<String> positions;
     private String position;
 
-    public BattleShip(String player1, String player2){
+    public BattleShip(String player1, String player2) {
         this.player1 = player1;
         this.player2 = player2;
         positions = new ArrayList<>();
@@ -22,14 +22,14 @@ public class BattleShip {
         return positions;
     }
 
-    public String getPosition(){
+    public String getPosition() {
         return position;
     }
 
-    public void askPosition(){
+    public void askPosition() {
         Scanner scan = new Scanner(System.in);
         System.out.print("Enter move (LETTER#): ");
-        position  = scan.nextLine();
+        position = scan.nextLine();
     }
 
     public void placeShip(String position) {
@@ -39,7 +39,6 @@ public class BattleShip {
     public boolean occupiesPosition(String position) {
         return positions.contains(position);
     }
-
 
 
     public void placeShip(Ship ship, String position) {
@@ -56,3 +55,4 @@ public class BattleShip {
         }
         return false;
     }
+}
