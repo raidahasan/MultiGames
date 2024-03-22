@@ -39,20 +39,4 @@ public class BattleShip {
     public boolean occupiesPosition(String position) {
         return positions.contains(position);
     }
-
-
-    public void placeShip(Ship ship, String position) {
-        ship.placeShip(position);
-        ships.add(ship);
-    }
-
-    public boolean checkHit(String position) {
-        for (Ship ship : ships) {
-            if (ship.occupiesPosition(position)) {
-                ship.getPositions().remove(position);
-                return true;
-            }
-        }
-        return false;
-    }
 }
