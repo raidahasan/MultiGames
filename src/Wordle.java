@@ -1,7 +1,12 @@
+import java.util.Scanner;
+
 public class Wordle {
-    Board wordleBoard = new Board();
+
+    // user gets 6 tries to guess a 5-letter word
+    Board wordleBoard = new Board(6, 5);
     String[] wordList = {"Smart", "Kitty", "Drive", "Jokes", "Apple", "Sunny", "Today", "Check", "Fresh", "Froze"};
     String word = "";
+    String guess;
 
     public Wordle() { }
 
@@ -16,9 +21,20 @@ public class Wordle {
         word = list[randomInt];
     }
     public void startWordle() {
+        Scanner scan = new Scanner(System.in);
         welcome();
         pickWord(wordList);
+        System.out.println("Random word chosen!");
+        System.out.println("Make your guess: ");
+        guess = scan.nextLine();
+        boolean check = checkGuess(guess);
+    }
 
+    public boolean checkGuess(String guess) {
+        if (guess.equals(word)) {
+            return true;
+        }
+        return false;
     }
 
 }
