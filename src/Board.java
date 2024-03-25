@@ -15,6 +15,17 @@ public class Board {
         }
     }
 
+    public Board() {
+        board = new Space[8][8];
+        this.height = 8;
+        this.length = 8;
+        for(int i = 0; i<height; i++){
+            for(int j = 0; j<length; j++){
+                board[i][j]= new Space("_");
+            }
+        }
+    }
+
     public void printBoard(){
         for(int i = 0; i<height; i++){
             for(int j = 0; j<length; j++){
