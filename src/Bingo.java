@@ -6,7 +6,7 @@ public class Bingo {
        Random random = new Random();
        for (int r = 0; r < bingo.length; r++) {
           for (int c = 0; c < bingo[0].length; c++) {
-              if
+
           }
        }
    }
