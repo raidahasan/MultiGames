@@ -2,6 +2,12 @@ import java.util.Scanner;
 
 public class Escape {
     private Space[][] board;
+    Obstacle X = new Obstacle();
+    Obstacle Y = new Obstacle();
+    Obstacle Z = new Obstacle();
+    Obstacle A = new Obstacle();
+    Obstacle B = new Obstacle();
+    private boolean hit = false;
     int row;
     int col;
     PointsPlayer p = new PointsPlayer();
@@ -9,41 +15,45 @@ public class Escape {
         Board b = new Board(5, 25);
         board = b.getBoard();
         p = new PointsPlayer();
+        hit = false;
     }
 
     public void run(){
         board[3][1] = p;
         row = 3;
         col = 1;
-        boolean points20 =true;
-        while(points20){
-            insertObstacles();
-            for(int i = 0; i<3; i++){
-                printEsc();
-                playerTurn();
-            }
-            points20 = false;
+        insertObstacle(X);
+        while(!hit) {
+            printEsc();
+            updateObstacle(X);
+            playerTurn();
         }
+        printEsc();
     }
 
-    public void insertObstacles(){
-        Obstacle X = new Obstacle();
-        int random1;
-        int random2;
-        int random3;
-        int random4;
-        int random5;
-        int random6;
-        random1 = (int)(Math.random()*3)+22;
-        random2 = (int)(Math.random()*3)+22;
-        random3 = (int)(Math.random()*3)+22;
-        random4 = (int)(Math.random()*5);
-        random5 = (int)(Math.random()*5);
-        random6 = (int)(Math.random()*5);
-        board[random4][random1] = X;
-        board[random5][random2] = X;
-        board[random6][random3] = X;
+    public void insertObstacle(Obstacle obstacle){
+        obstacle.setColumn((int)(Math.random()*3)+22);
+        obstacle.setRow((int)(Math.random()*4)+1);
+        board[obstacle.getRow()][obstacle.getColumn()] = obstacle;
 
+    }
+
+    public void updateObstacle(Obstacle obstacle){
+//        if(board[X.getRow()][X.getColumn()] instanceof Obstacle && row==X.getRow()&& col==X.getColumn()){
+//            hit = true;
+//        }
+//        board[X.getRow()][X.getColumn()] = new Space("_");
+//        X.setColumn(X.getColumn()-1);
+//        if(X.getColumn()!=-1 && X.getRow()!=-1){
+//            board[X.getRow()][X.getColumn()] = X;
+//        }else{
+//            X = new Obstacle();
+//        }
+        board[obstacle.getRow()][obstacle.getColumn()] = new Space("_");
+        obstacle.setColumn(obstacle.getColumn()-1);
+        if(obstacle.getColumn()!=-1 && obstacle.getRow()!=-1){
+            board[obstacle.getRow()][obstacle.getColumn()] = obstacle;
+        }
     }
 
     public void printEsc(){
@@ -56,33 +66,43 @@ public class Escape {
         System.out.println("\n");
     }
 
+    public boolean hitObstacle(){
+        if(board[row][col] instanceof Obstacle){
+            System.out.println("You died");
+            return true;
+        }
+        return false;
+    }
     public void playerTurn(){
         Scanner scan = new Scanner(System.in);
         System.out.println("Enter your move(W, A, S, or D)");
         String WASD = scan.nextLine();
         WASD = WASD.toUpperCase();
         if(WASD.equals("A")){
-            if(col==0){
-                System.out.println("Out of bounds");
-            }else{
-                board[row][col] = new Space("_");
-                col--;
-                board[row][col] = p;
-            }
-        }else if(WASD.equals("D")){
-            if(col==24){
-                System.out.println("Out of bounds");
-            }else{
-                board[row][col] = new Space("_");
-                col++;
-                board[row][col] = p;
-            }
+//            if(col==0){
+//                System.out.println("Out of bounds");
+//            }else{
+//                board[row][col] = new Space("_");
+//                col--;
+//                hit = hitObstacle();
+//                board[row][col] = p;
+//            }
+//        }else if(WASD.equals("D")){
+//            if(col==24){
+//                System.out.println("Out of bounds");
+//            }else{
+//                board[row][col] = new Space("_");
+//                col++;
+//                hit = hitObstacle();
+//                board[row][col] = p;
+//            }
         }else if(WASD.equals("W")){
             if(row==0){
                System.out.println("Out of bounds");
             }else{
                 board[row][col] = new Space("_");
                 row--;
+                hit = hitObstacle();
                 board[row][col] = p;
             }
         }else if(WASD.equals("S")){
@@ -91,6 +111,7 @@ public class Escape {
             }else{
                 board[row][col] = new Space("_");
                 row++;
+                hit = hitObstacle();
                 board[row][col] = p;
             }
         }else{
