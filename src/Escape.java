@@ -50,9 +50,11 @@ public class Escape {
 //            X = new Obstacle();
 //        }
         board[obstacle.getRow()][obstacle.getColumn()] = new Space("_");
-        obstacle.setColumn(obstacle.getColumn()-1);
-        if(obstacle.getColumn()!=-1 && obstacle.getRow()!=-1){
+        if(obstacle.getColumn()!=-0 && obstacle.getRow()!=-0){
+            obstacle.setColumn(obstacle.getColumn()-1);
             board[obstacle.getRow()][obstacle.getColumn()] = obstacle;
+        }else{
+            board[obstacle.getRow()][obstacle.getColumn()] = new Space("_");
         }
     }
 
@@ -75,7 +77,7 @@ public class Escape {
     }
     public void playerTurn(){
         Scanner scan = new Scanner(System.in);
-        System.out.println("Enter your move(W, A, S, or D)");
+        System.out.println("W for up, S for down - any other key for staying still");
         String WASD = scan.nextLine();
         WASD = WASD.toUpperCase();
         if(WASD.equals("A")){
@@ -115,7 +117,7 @@ public class Escape {
                 board[row][col] = p;
             }
         }else{
-            System.out.println("Invalid input");
+            System.out.println("");
         }
     }
 }
