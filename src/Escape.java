@@ -39,6 +39,16 @@ public class Escape {
     }
 
     public void updateObstacle(Obstacle obstacle){
+//        if(board[X.getRow()][X.getColumn()] instanceof Obstacle && row==X.getRow()&& col==X.getColumn()){
+//            hit = true;
+//        }
+//        board[X.getRow()][X.getColumn()] = new Space("_");
+//        X.setColumn(X.getColumn()-1);
+//        if(X.getColumn()!=-1 && X.getRow()!=-1){
+//            board[X.getRow()][X.getColumn()] = X;
+//        }else{
+//            X = new Obstacle();
+//        }
         board[obstacle.getRow()][obstacle.getColumn()] = new Space("_");
         if(obstacle.getColumn()!=0 && obstacle.getRow()!=0){
             obstacle.setColumn(obstacle.getColumn()-1);
@@ -66,6 +76,13 @@ public class Escape {
         System.out.println("\n");
     }
 
+    public boolean hitObstacle(){
+        if(board[row][col] instanceof Obstacle){
+            System.out.println("You died");
+            return true;
+        }
+        return false;
+    }
     public void playerTurn(){
         Scanner scan = new Scanner(System.in);
         System.out.println("Enter your move(W, A, S, or D)");
