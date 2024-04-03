@@ -1,21 +1,13 @@
-import java.util.Random;
-public class Bingo {
-   int[][] bingo = new int[5][5];
+class Bingo {
+    private BingoCard card;
 
-   public Bingo() {
-       Random random = new Random();
-       for (int r = 0; r < bingo.length; r++) {
-          for (int c = 0; c < bingo[0].length; c++) {
+    public BingoGame() {
+        card = new BingoCard();
+    }
 
-          }
-       }
-   }
-
-   public int[][] getBingo() {
-       return bingo;
-   }
-
-   public void setBingo(int[][] bingo) {
-       this.bingo = bingo;
-   }
+    public void play() {
+        System.out.println("Welcome to Bingo!");
+        card.printCard();
+    }
 }
+
