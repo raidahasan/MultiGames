@@ -1,6 +1,6 @@
 public class MultiGamesRunner {
     public static void main (String []args) {
-        Escape esc = new Escape();
+        EscapeLimited esc = new EscapeLimited();
         esc.run();
 
         Bingo game = new Bingo();

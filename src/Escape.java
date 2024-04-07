@@ -8,27 +8,36 @@ public class Escape {
     Obstacle A = new Obstacle();
     Obstacle B = new Obstacle();
     private boolean hit = false;
-    int playerInput =0;
-    int row;
-    int col;
+    private int playerInput =0;
+    private int points = 0;
+    private int row;
+    private int col;
     PointsPlayer p = new PointsPlayer();
     public Escape(){
         Board b = new Board(5, 25);
         board = b.getBoard();
         p = new PointsPlayer();
         hit = false;
-    }
-
-    public void run(){
         board[3][1] = p;
         row = 3;
         col = 1;
+    }
+
+    public void run(){
         insertObstacle(X);
         while(!hit) {
             printEsc();
             playerTurn();
         }
         printEsc();
+    }
+
+    public int getPoints(){
+        return points;
+    }
+
+    public boolean isHit() {
+        return hit;
     }
 
     public void insertObstacle(Obstacle obstacle){
@@ -79,6 +88,7 @@ public class Escape {
         String WASD = scan.nextLine();
         WASD = WASD.toUpperCase();
         playerInput++;
+        points++;
         if(WASD.equals("W")){
             if(row==0){
                System.out.println("Out of bounds");
