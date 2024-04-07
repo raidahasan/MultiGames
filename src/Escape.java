@@ -67,28 +67,10 @@ public class Escape {
     }
     public void playerTurn(){
         Scanner scan = new Scanner(System.in);
-        System.out.println("Enter your move(W, A, S, or D)");
+        System.out.println("Enter your move (W for up, S for down)");
         String WASD = scan.nextLine();
         WASD = WASD.toUpperCase();
-        if(WASD.equals("A")){
-//            if(col==0){
-//                System.out.println("Out of bounds");
-//            }else{
-//                board[row][col] = new Space("_");
-//                col--;
-//                hit = hitObstacle();
-//                board[row][col] = p;
-//            }
-//        }else if(WASD.equals("D")){
-//            if(col==24){
-//                System.out.println("Out of bounds");
-//            }else{
-//                board[row][col] = new Space("_");
-//                col++;
-//                hit = hitObstacle();
-//                board[row][col] = p;
-//            }
-        }else if(WASD.equals("W")){
+        if(WASD.equals("W")){
             if(row==0){
                System.out.println("Out of bounds");
             }else{
@@ -107,7 +89,8 @@ public class Escape {
                 board[row][col] = p;
             }
         }else{
-            System.out.println("Invalid input");
+            System.out.println("Stayed still");
+            hit = hitObstacle();
         }
     }
 }

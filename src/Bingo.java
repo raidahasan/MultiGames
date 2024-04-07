@@ -1,7 +1,7 @@
 class Bingo {
     private BingoCard card;
 
-    public BingoGame() {
+    public Bingo() {
         card = new BingoCard();
     }
 
