@@ -10,9 +10,15 @@ public class Board {
         this.length = length;
         for(int i = 0; i<height; i++){
             for(int j = 0; j<length; j++){
-                board[i][j]= new Space("_");
+                board[i][j]= new Space(" _ ");
             }
         }
+    }
+
+    public Space[][] getBoard(){ return board; }
+
+    public void setBoard(int row, int col, String space) {
+        board[row][col] = new Space(space);
     }
 
     public Board() {
@@ -21,7 +27,7 @@ public class Board {
         this.length = 8;
         for(int i = 0; i<height; i++){
             for(int j = 0; j<length; j++){
-                board[i][j]= new Space("_");
+                board[i][j]= new Space(" _ ");
             }
         }
     }
@@ -34,6 +40,4 @@ public class Board {
             System.out.println();
         }
     }
-
-    public Space[][] getBoard(){ return board; }
 }
