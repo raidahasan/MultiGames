@@ -84,7 +84,7 @@ public class Escape {
     }
     public void playerTurn(){
         Scanner scan = new Scanner(System.in);
-        System.out.println("Enter your move (W for up, S for down)");
+        System.out.print("Enter your move (W for up, S for down): ");
         String WASD = scan.nextLine();
         WASD = WASD.toUpperCase();
         playerInput++;

@@ -37,6 +37,7 @@ public class Wordle {
             boolean check = checkGuess(guess);
             tries++;
             while (!check && tries <= 5) {
+                System.out.println();
                 System.out.print("Try again!: ");
                 guess = scan.nextLine();
                 checkLetter(guess, tries);
