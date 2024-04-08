@@ -4,22 +4,17 @@ public class EscapeLimited extends Escape {
     }
 
     @Override
-    public void run(){
+    public void run() {
         insertObstacle(X);
-        while(!isHit()&&getPoints()<=100) {
+        while (!isHit() && getPoints() <= 100) {
             printEsc();
             playerTurn();
         }
         printEsc();
-        if(isHit()){
+        if (isHit()) {
             System.out.println("Hit obstacle - you did not escape :(");
-        }else{
+        } else {
             System.out.println("You escaped!!");
         }
-//        try{
-//            Thread.sleep(2000);
-//        }catch(Exception e){
-//            System.out.println("Error");
-//        }
     }
 }

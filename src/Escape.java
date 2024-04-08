@@ -55,7 +55,7 @@ public class Escape {
 
     public int[] getTop5(){ return top5; }
     public void insertObstacle(Obstacle obstacle){
-        obstacle.setColumn(24);  //((int)(Math.random()*3)+22)
+        obstacle.setColumn(24);
         obstacle.setRow((int)(Math.random()*5));
         board[obstacle.getRow()][obstacle.getColumn()] = obstacle;
 
