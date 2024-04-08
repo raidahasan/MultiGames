@@ -3,7 +3,6 @@ import java.util.Scanner;
 public class BattleshipGame extends Board {
     private Ship[] ships;
     private final int NUM_SHIPS = 5;
-
     private int playerHits;
     private int opponentHits;
     private int playerPoints;
@@ -152,7 +151,9 @@ public class BattleshipGame extends Board {
         while (!isGameOver()) {
             playerTurn();
             printBoard(false); // Reprint the board after player's turn
-            if (isGameOver()) break; // Check if player has won after their turn
+            if (isGameOver()){
+                break;
+        }
             opponentTurn();
             printBoard(false); // Reprint the board after opponent's turn
         }
