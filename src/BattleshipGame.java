@@ -1,225 +1,110 @@
 import java.util.Scanner;
 
 public class BattleshipGame extends Board {
-    private Ship[] ships;
-    private final int NUM_SHIPS = 5;
-    private int playerHits;
-    private int opponentHits;
-    private int playerPoints;
-    private int opponentPoints;
-    private Scanner scanner;
+    private Board battleShipBoard;
+    private Board battleShipBoardAns;
+    private int playerHit;
+    private int opponentHit;
+    private int shipCounter;
+    private Scanner scan;
 
     public BattleshipGame() {
-        super(8, 8); // Assuming a standard 8x8 board for Battleship
-        ships = new Ship[NUM_SHIPS];
-        playerHits = 0;
-        opponentHits = 0;
-        playerPoints = 0;
-        opponentPoints = 0;
-        initializeShips();
-        placeShipsRandomly();
-        scanner = new Scanner(System.in);
-    }
-
-    private void initializeShips() {
-        // Define the ships with their names and sizes
-        ships[0] = new Ship("Carrier", 5);
-        ships[1] = new Ship("Battleship", 4);
-        ships[2] = new Ship("Cruiser", 3);
-        ships[3] = new Ship("Submarine", 3);
-        ships[4] = new Ship("Destroyer", 2);
-    }
-
-    private void placeShipsRandomly() {
-        for (Ship ship : ships) {
-            boolean placed = false;
-            while (!placed) {
-                int row = (int) (Math.random() * getHeight());
-                int col = (int) (Math.random() * getLength());
-                boolean horizontal = Math.random() < 0.5;
-
-                if (canPlaceShip(ship, row, col, horizontal)) {
-                    placeShip(ship, row, col, horizontal);
-                    placed = true;
-                }
-            }
-        }
-    }
-
-    private boolean canPlaceShip(Ship ship, int row, int col, boolean horizontal) {
-        if (horizontal) {
-            if (col + ship.getSize() > getLength()){
-                return false;
-            }
-            for (int c = col; c < col + ship.getSize(); c++) {
-                if (!getBoard()[row][c].getSpace().equals(" _ ")){
-                    return false;
-                }
-            }
-        } else {
-            if (row + ship.getSize() > getHeight()){
-                return false;
-            }
-            for (int r = row; r < row + ship.getSize(); r++) {
-                if (!getBoard()[r][col].getSpace().equals(" _ ")){
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    private void placeShip(Ship ship, int row, int col, boolean horizontal) {
-        if (horizontal) {
-            for (int c = col; c < col + ship.getSize(); c++) {
-                getBoard()[row][c].setSpace(" " + ship.getName().charAt(0) + " ");
-            }
-        } else {
-            for (int r = row; r < row + ship.getSize(); r++) {
-                getBoard()[r][col].setSpace(" " + ship.getName().charAt(0) + " ");
-            }
-        }
-    }
-
-    public void printBoard(boolean showShips) {
-        Space[][] board = getBoard();
-        for (int i = 0; i < getHeight(); i++) {
-            for (int j = 0; j < getLength(); j++) {
-                if (!showShips && !board[i][j].getSpace().equals(" _ ") && !board[i][j].getSpace().equals(" O ") && !board[i][j].getSpace().equals(" X ")) {
-                    System.out.print(" _ ");
-                } else {
-                    System.out.print(board[i][j].getSpace());
-                }
-            }
-            System.out.println();
-        }
-    }
-
-    public boolean attack(int row, int col, boolean playerTurn) {
-        String space = getBoard()[row][col].getSpace();
-        if (space.equals(" _ ")) {
-            getBoard()[row][col].setSpace(" X ");
-            return false; // Miss
-        } else if (space.equals(" O ") || space.equals(" X ")) {
-            System.out.println("Already hit this spot!");
-            return false; // Already hit
-        } else {
-            getBoard()[row][col].setSpace(" O ");
-            char shipInitial = space.charAt(1);
-            if (playerTurn) {
-                playerHits++;
-                if (isShipSunk(shipInitial, true)) {
-                    playerPoints++;
-                    markSunkShip(shipInitial, true);
-                    System.out.println("Player sunk a ship!");
-                }
-            } else {
-                opponentHits++;
-                if (isShipSunk(shipInitial, false)) {
-                    opponentPoints++;
-                    markSunkShip(shipInitial, false);
-                    System.out.println("Opponent sunk a ship!");
-                }
-            }
-            return true; // Hit
-        }
-    }
-
-    private boolean isShipSunk(char shipInitial, boolean playerTurn) {
-        for (int i = 0; i < getHeight(); i++) {
-            for (int j = 0; j < getLength(); j++) {
-                if (getBoard()[i][j].getSpace().charAt(1) == shipInitial && !getBoard()[i][j].getSpace().equals(" O ")) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    private void markSunkShip(char shipInitial, boolean playerTurn) {
-        char mark = playerTurn ? 'P' : 'C';
-        for (int i = 0; i < getHeight(); i++) {
-            for (int j = 0; j < getLength(); j++) {
-                if (getBoard()[i][j].getSpace().charAt(1) == shipInitial) {
-                    getBoard()[i][j].setSpace(" " + mark + " ");
-                }
-            }
-        }
-    }
-
-    private boolean isGameOver() {
-        return playerPoints == NUM_SHIPS || opponentPoints == NUM_SHIPS;
-    }
-
-    private void determineWinner() {
-        if (playerHits > opponentHits) {
-            playerPoints++;
-            System.out.println("Player wins!");
-        } else if (playerHits < opponentHits) {
-            opponentPoints++;
-            System.out.println("Opponent wins!");
-        } else {
-            System.out.println("It's a draw!");
-        }
+        battleShipBoard  = new Board(8, 8);
+        battleShipBoardAns = new Board(8,8);
+        scan = new Scanner(System.in);
     }
 
     public void startGame() {
-        System.out.println("Battleship game started!");
-        printBoard(false); // Print the player's board without showing ships
-
-        while (!isGameOver()) {
-            playerTurn();
-            printBoard(false); // Reprint the board after player's turn
-            if (isGameOver()) break;
-
-            opponentTurn();
-            printBoard(false); // Reprint the board after opponent's turn
+        initializeAnswerBoard();
+        battleShipBoard.printBoard("b");
+        playGame();
+    }
+    public void initializeAnswerBoard() {
+        for (int r = 0; r < 3; r++) {
+            battleShipBoardAns.setBoard(r, 5, " O ");
         }
-
-        determineWinner();
-
-        scanner.close();
+        for (int r = 1; r < 6; r++) {
+            battleShipBoardAns.setBoard(r, 1, " O ");
+        }
+        for (int c = 0; c < 4; c++) {
+            battleShipBoardAns.setBoard(7, c, " O ");
+        }
+        for (int c = 5; c < 8; c++) {
+            battleShipBoardAns.setBoard(6, c, " O ");
+        }
+        for (int c = 6; c < 8; c++) {
+            battleShipBoardAns.setBoard(3, c, " O ");
+        }
     }
 
-    private void playerTurn() {
-        System.out.println("Player's turn:");
-        int row, col;
-        do {
-            System.out.print("Enter row (0-7): ");
-            row = scanner.nextInt();
-            scanner.nextLine();
-            System.out.print("Enter column (0-7): ");
-            col = scanner.nextInt();
-            scanner.nextLine();
-        } while (!isValidAttack(row, col));
-
-        boolean isHit = attack(row, col, true);
-        if (isHit) {
-            System.out.println("Player hit a ship!");
+    public void playGame() {
+        while (shipCounter < 17) {
+            System.out.println(Colors.YELLOW + "Player's Attack" + Colors.RESET);
+            boolean play = playerAttack();
+            battleShipBoard.printBoard("b");
+            if (play) {
+                playGame();
+            } else {
+                System.out.println(Colors.PURPLE + "Opponent's Attack" + Colors.RESET);
+                opponentAttack();
+                battleShipBoard.printBoard("b");
+            }
+            playGame();
+        }
+        battleShipBoard.printBoard("b");
+        System.out.println(Colors.YELLOW + "Player Score: " + Colors.RESET + playerHit);
+        System.out.println(Colors.PURPLE + "Opponent Score: " + Colors.RESET + opponentHit);
+        if (playerHit > opponentHit) {
+            System.out.println(Colors.GREEN + "Player Won!!" + Colors.RESET);
         } else {
-            System.out.println("Player missed!");
+            System.out.println(Colors.RED + "Opponent Won :(" + Colors.RESET);
         }
     }
 
-    private void opponentTurn() {
-        System.out.println("Opponent's turn:");
-        int row, col;
-        do {
-            row = (int) (Math.random() * getHeight());
-            col = (int) (Math.random() * getLength());
-        } while (!isValidAttack(row, col));
-
-        boolean isHit = attack(row, col, false);
-        if (isHit) {
-            System.out.println("Opponent hit a ship!");
+    public boolean opponentAttack() {
+        int r = (int) (Math.random() * 7);
+        int c = (int) (Math.random() * 7);
+        if (battleShipBoard.getBoardSpace(r, c).getSpace().equals(" O ") || battleShipBoard.getBoardSpace(r, c).getSpace().equals(" X ")) {
+            opponentAttack();
         } else {
-            System.out.println("Opponent missed!");
+            if (battleShipBoardAns.getBoardSpace(r, c).getSpace().equals(" O ")) {
+                battleShipBoard.setBoard(r, c, " O ");
+                opponentHit++;
+                shipCounter++;
+                System.out.println("Opponent Hit a Ship!!");
+                battleShipBoard.printBoard("b");
+                opponentAttack();
+            } else {
+                    battleShipBoard.setBoard(r, c, " X ");
+                    System.out.println("Opponent missed player's turn");
+                    return false;
+            }
         }
+        return false;
     }
 
-    private boolean isValidAttack(int row, int col) {
-        return row >= 0 && row < getHeight() && col >= 0 && col < getLength() && getBoard()[row][col].getSpace().equals(" _ ");
+    public boolean playerAttack() {
+        System.out.print("Which row (0-7): ");
+        int r = scan.nextInt();
+        scan.nextLine();
+        System.out.print("Which column (0-7): ");
+        int c = scan.nextInt();
+        scan.nextLine();
+        if (battleShipBoard.getBoardSpace(r, c).getSpace().equals(" O ") || battleShipBoard.getBoardSpace(r, c).getSpace().equals(" X ")) {
+            return true;
+        } else {
+            if (battleShipBoardAns.getBoardSpace(r, c).getSpace().equals(" O ")) {
+                battleShipBoard.setBoard(r, c, " O ");
+                playerHit++;
+                shipCounter++;
+                System.out.println("Player Hit a Ship!!");
+                return true;
+            } else {
+                battleShipBoard.setBoard(r, c, " X ");
+                System.out.println("Player missed opponent's turn");
+                return false;
+            }
+        }
     }
 }
-
 

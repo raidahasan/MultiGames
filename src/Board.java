@@ -10,7 +10,7 @@ public class Board {
         this.length = length;
         for(int i = 0; i<height; i++){
             for(int j = 0; j<length; j++){
-                board[i][j]= new Space(" _ ");
+                board[i][j]= new Space("  ");
             }
         }
     }
@@ -35,7 +35,7 @@ public class Board {
         this.length = 8;
         for(int i = 0; i<height; i++){
             for(int j = 0; j<length; j++){
-                board[i][j]= new Space(" _ ");
+                board[i][j]= new Space("  ");
             }
         }
     }
@@ -47,5 +47,24 @@ public class Board {
             }
             System.out.println();
         }
+    }
+
+    public void printBoard(String b){
+        for(int i = 0; i<height; i++){
+            for(int j = 0; j<length; j++) {
+                if (board[i][j].getSpace().equals(" O ")) {
+                    System.out.print(Colors.GREEN + board[i][j].getSpace() + Colors.RESET);
+                } else if (board[i][j].getSpace().equals(" X ")) {
+                    System.out.print(Colors.RED + board[i][j].getSpace() + Colors.RESET);
+                } else {
+                    System.out.print(Colors.BLUE + board[i][j].getSpace() + Colors.RESET);
+                }
+            }
+            System.out.println();
+        }
+    }
+
+    public Space getBoardSpace(int r, int c) {
+        return board[r][c];
     }
 }
