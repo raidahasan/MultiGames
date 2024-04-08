@@ -1,4 +1,4 @@
-public class EscapeLimited extends Escape{
+public class EscapeLimited extends Escape {
 
     public EscapeLimited(){
     }
@@ -16,5 +16,10 @@ public class EscapeLimited extends Escape{
         }else{
             System.out.println("You escaped!!");
         }
+//        try{
+//            Thread.sleep(2000);
+//        }catch(Exception e){
+//            System.out.println("Error");
+//        }
     }
 }
