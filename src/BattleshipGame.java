@@ -3,7 +3,6 @@ import java.util.Scanner;
 public class BattleshipGame extends Board {
     private Ship[] ships;
     private final int NUM_SHIPS = 5;
-
     private int playerHits;
     private int opponentHits;
     private int playerPoints;
