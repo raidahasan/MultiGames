@@ -48,14 +48,22 @@ public class BattleshipGame extends Board {
 
     private boolean canPlaceShip(Ship ship, int row, int col, boolean horizontal) {
         if (horizontal) {
-            if (col + ship.getSize() > getLength()) return false;
+            if (col + ship.getSize() > getLength()){
+                return false;
+            }
             for (int c = col; c < col + ship.getSize(); c++) {
-                if (!getBoard()[row][c].getSpace().equals(" _ ")) return false;
+                if (!getBoard()[row][c].getSpace().equals(" _ ")){
+                    return false;
+                }
             }
         } else {
-            if (row + ship.getSize() > getHeight()) return false;
+            if (row + ship.getSize() > getHeight()){
+                return false;
+            }
             for (int r = row; r < row + ship.getSize(); r++) {
-                if (!getBoard()[r][col].getSpace().equals(" _ ")) return false;
+                if (!getBoard()[r][col].getSpace().equals(" _ ")){
+                    return false;
+                }
             }
         }
         return true;
