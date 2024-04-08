@@ -1,4 +1,4 @@
-public class EscapeLimited extends Escape{
+public class EscapeLimited extends Escape {
 
     public EscapeLimited(){
     }

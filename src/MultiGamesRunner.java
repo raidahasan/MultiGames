@@ -3,9 +3,9 @@ import java.util.Scanner;
 public class MultiGamesRunner {
     public static void main (String []args) {
         Scanner scan = new Scanner(System.in);
-        System.out.println(Colors.BLUE + "{ /////////////////////////  }");
-        System.out.println("{  WELCOME TO SARS ARCADE!! }");
-        System.out.println("{ /////////////////////////  }" + Colors.RESET);
+        System.out.println(Colors.RED + "{ -------------------------  }" + Colors.RESET);
+        System.out.println(Colors.BLUE + "   WELCOME TO " + Colors.RED + "SARS ARCADE!! " + Colors.RESET);
+        System.out.println(Colors.BLUE + "{ -------------------------  }" + Colors.RESET);
         System.out.println();
         mainMenu();
         System.out.println();
@@ -20,30 +20,36 @@ public class MultiGamesRunner {
                 System.out.println();
                 System.out.print("Which game would you like to play next? (x to quit): ");
                 option = scan.nextLine();
+                System.out.println();
             } else if (option.equals("2")) {
                 Bingo game = new Bingo();
                 game.play();
                 System.out.println();
                 System.out.print("Which game would you like to play next? (x to quit): ");
                 option = scan.nextLine();
+                System.out.println();
             } else if (option.equals("3")) {
                 Wordle myWordle = new Wordle();
                 System.out.println();
                 System.out.print("Which game would you like to play next? (x to quit): ");
                 option = scan.nextLine();
-            }else if(option.equals("x")){
-                break;
-            }else{
+                System.out.println();
+            } else if (option.equals("4")) {
+                BattleshipGame game = new BattleshipGame();
+                game.startGame();
+                System.out.println();
+                System.out.print("Which game would you like to play next? (x to quit): ");
                 option = scan.nextLine();
+                System.out.println();
             }
         }
     }
 
     public static void mainMenu() {
-        System.out.println("Arcade Games:");
+        System.out.println(Colors.YELLOW + "Arcade Games:");
         System.out.println("1. Escape Limited");
         System.out.println("2. Bingo");
         System.out.println("3. Wordle");
-        System.out.println("4. Battle Ship");
+        System.out.println("4. Battle Ship" + Colors.RESET);
     }
 }

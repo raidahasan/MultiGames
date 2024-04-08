@@ -17,6 +17,7 @@ public class Wordle {
         System.out.println(Colors.PURPLE + "{--------------------------------------}");
         System.out.println("    Welcome to Shubhechchha's Wordle!   ");
         System.out.println("{--------------------------------------}" + Colors.RESET);
+        System.out.println();
     }
 
     public void pickWord(String[] list) {
