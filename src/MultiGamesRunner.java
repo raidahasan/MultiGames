@@ -18,6 +18,8 @@ public class MultiGamesRunner {
                 EscapeMenu esc = new EscapeMenu();
                 esc.runner();
                 System.out.println();
+                mainMenu();
+                System.out.println();
                 System.out.print("Which game would you like to play next? (x to quit): ");
                 option = scan.nextLine();
                 System.out.println();
@@ -25,11 +27,15 @@ public class MultiGamesRunner {
                 Bingo game = new Bingo();
                 game.play();
                 System.out.println();
+                mainMenu();
+                System.out.println();
                 System.out.print("Which game would you like to play next? (x to quit): ");
                 option = scan.nextLine();
                 System.out.println();
             } else if (option.equals("3")) {
                 Wordle myWordle = new Wordle();
+                System.out.println();
+                mainMenu();
                 System.out.println();
                 System.out.print("Which game would you like to play next? (x to quit): ");
                 option = scan.nextLine();
@@ -38,11 +44,19 @@ public class MultiGamesRunner {
                 BattleshipGame game = new BattleshipGame();
                 game.startGame();
                 System.out.println();
+                mainMenu();
+                System.out.println();
                 System.out.print("Which game would you like to play next? (x to quit): ");
                 option = scan.nextLine();
                 System.out.println();
+            } else if(option.equals("x")) {
+                break;
+            } else {
+                option = scan.nextLine();
             }
         }
+        System.out.println(Colors.RED + "THANK YOU FOR VISITING SARS ARCADE!" + Colors.RESET);
+        System.out.println(Colors.BLUE + "Visit again!" + Colors.RESET);
     }
 
     public static void mainMenu() {
