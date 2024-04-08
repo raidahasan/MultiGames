@@ -17,6 +17,14 @@ public class Board {
 
     public Space[][] getBoard(){ return board; }
 
+    public int getLength(){
+        return length;
+    }
+
+    public int getHeight(){
+        return height;
+    }
+
     public void setBoard(int row, int col, String space) {
         board[row][col] = new Space(space);
     }
