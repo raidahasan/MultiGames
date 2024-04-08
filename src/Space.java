@@ -1,11 +1,10 @@
 public class Space {
-    private String space = "";
+    private String space;
 
     public Space(String string){
-        space = string;
+        this.space = string;
     }
 
-    public void setSpace(String string) { space = string; }
-    public String getSpace() { return space; }
-
+    public void setSpace(String string) { this.space = string; }
+    public String getSpace() { return this.space; }
 }
