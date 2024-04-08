@@ -1,7 +1,10 @@
 import java.util.Scanner;
 
 public class MultiGamesRunner {
-    public static void main (String []args) {
+    public MultiGamesRunner(){
+        runnerFinal();
+    }
+    public static void runnerFinal () {
         Scanner scan = new Scanner(System.in);
         System.out.println(Colors.RED + "{ -------------------------  }" + Colors.RESET);
         System.out.println(Colors.BLUE + "   WELCOME TO " + Colors.RED + "SARS ARCADE!! " + Colors.RESET);
