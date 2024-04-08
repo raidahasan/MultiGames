@@ -2,7 +2,6 @@ import java.util.Scanner;
 
 public class MultiGamesRunner {
     public MultiGamesRunner(){
-        runnerFinal();
     }
     public static void runnerFinal () {
         Scanner scan = new Scanner(System.in);
