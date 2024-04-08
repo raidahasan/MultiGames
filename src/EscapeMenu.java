@@ -1,10 +1,7 @@
 import java.util.Scanner;
 public class EscapeMenu {
-    //make menu - options to play escapeInfinite (NeverEscape) - have a list of top 5 high scores - have option to play escape limited
-    //have an arraylist to allow player to choose their special character and one to add to the arraylist with own special character
-    Scanner scan = new Scanner(System.in);
     Escape esc = new Escape();
-    EscapeLimited escapeLimited = new EscapeLimited();
+    Scanner scan = new Scanner(System.in);
 
     public EscapeMenu(){
         runner();
@@ -20,18 +17,20 @@ public class EscapeMenu {
     }
 
     public void runner(){
-        menu();
         while(!choice.equals("x")){
+            menu();
             if(choice.equals("1")){
+                EscapeLimited escapeLimited = new EscapeLimited();
                 escapeLimited.run();
             }else if(choice.equals("2")){
+                esc = new Escape();
                 esc.run();
             }else if(choice.equals("3")){
-                for(int i = 0; i<=4; i++){
-                    System.out.println(i+1 + ". " + esc.getTop5()[i]);
+                for(int i = 0; i <= 4; i++){
+                    System.out.println(i + 1 + ". " + esc.getTop5()[i]);
                 }
             }
-            menu();
         }
     }
+
 }

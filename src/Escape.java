@@ -39,7 +39,7 @@ public class Escape {
         for(int i = 0; i<=4; i++){
             if(points>top5[i]){
                 top5[i]=points;
-                System.out.println(Colors.GREEN + "!!!!!!!New High Score!!!!!!");
+                System.out.println(Colors.GREEN + "!!!!!!!New High Score!!!!!!" + Colors.RESET);
                 i = 5;
             }
         }
@@ -55,7 +55,7 @@ public class Escape {
 
     public int[] getTop5(){ return top5; }
     public void insertObstacle(Obstacle obstacle){
-        obstacle.setColumn(24);  //((int)(Math.random()*3)+22)
+        obstacle.setColumn(24);
         obstacle.setRow((int)(Math.random()*5));
         board[obstacle.getRow()][obstacle.getColumn()] = obstacle;
 

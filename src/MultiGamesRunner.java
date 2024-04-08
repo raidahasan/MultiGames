@@ -1,7 +1,10 @@
 import java.util.Scanner;
 
 public class MultiGamesRunner {
-    public static void main (String []args) {
+    public MultiGamesRunner(){
+        runnerFinal();
+    }
+    public static void runnerFinal () {
         Scanner scan = new Scanner(System.in);
         System.out.println(Colors.RED + "{ -------------------------  }" + Colors.RESET);
         System.out.println(Colors.BLUE + "   WELCOME TO " + Colors.RED + "SARS ARCADE!! " + Colors.RESET);
@@ -18,6 +21,8 @@ public class MultiGamesRunner {
                 EscapeMenu esc = new EscapeMenu();
                 esc.runner();
                 System.out.println();
+                mainMenu();
+                System.out.println();
                 System.out.print("Which game would you like to play next? (x to quit): ");
                 option = scan.nextLine();
                 System.out.println();
@@ -25,11 +30,15 @@ public class MultiGamesRunner {
                 Bingo game = new Bingo();
                 game.play();
                 System.out.println();
+                mainMenu();
+                System.out.println();
                 System.out.print("Which game would you like to play next? (x to quit): ");
                 option = scan.nextLine();
                 System.out.println();
             } else if (option.equals("3")) {
                 Wordle myWordle = new Wordle();
+                System.out.println();
+                mainMenu();
                 System.out.println();
                 System.out.print("Which game would you like to play next? (x to quit): ");
                 option = scan.nextLine();
@@ -38,11 +47,18 @@ public class MultiGamesRunner {
                 BattleshipGame game = new BattleshipGame();
                 game.startGame();
                 System.out.println();
+                mainMenu();
+                System.out.println();
                 System.out.print("Which game would you like to play next? (x to quit): ");
                 option = scan.nextLine();
                 System.out.println();
+            }else{
+                System.out.print("Invalid option, try again: ");
+                option = scan.nextLine();
             }
         }
+        System.out.println(Colors.RED + "THANK YOU FOR VISITING SARS ARCADE!" + Colors.RESET);
+        System.out.println(Colors.BLUE + "Visit again!" + Colors.RESET);
     }
 
     public static void mainMenu() {
