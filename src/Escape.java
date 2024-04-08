@@ -39,7 +39,7 @@ public class Escape {
         for(int i = 0; i<=4; i++){
             if(points>top5[i]){
                 top5[i]=points;
-                System.out.println(Colors.GREEN + "!!!!!!!New High Score!!!!!!");
+                System.out.println(Colors.GREEN + "!!!!!!!New High Score!!!!!!" + Colors.RESET);
                 i = 5;
             }
         }
