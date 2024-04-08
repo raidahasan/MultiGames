@@ -1,8 +1,11 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Scanner;
 
-class BingoCard {
+
+public class BingoCard {
     private int[][] card;
+
 
     public BingoCard() {
         card = new int[5][5];
@@ -16,6 +19,7 @@ class BingoCard {
         }
         Collections.shuffle(numbers);
 
+
         int numIndex = 0;
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
@@ -28,6 +32,7 @@ class BingoCard {
         }
     }
 
+
     public void printCard() {
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
@@ -35,5 +40,17 @@ class BingoCard {
             }
             System.out.println();
         }
+    }
+
+
+    public boolean containsNumber(int number) {
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                if (card[i][j] == number) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
