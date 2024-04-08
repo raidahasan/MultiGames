@@ -10,7 +10,7 @@ public class Board {
         this.length = length;
         for(int i = 0; i<height; i++){
             for(int j = 0; j<length; j++){
-                board[i][j]= new Space("  ");
+                board[i][j]= new Space(" _ ");
             }
         }
     }
