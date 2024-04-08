@@ -12,7 +12,7 @@ public class Escape {
     private int points = 0;
     private int row;
     private int col;
-    private int[] top5 = new int[5];
+    private static int[] top5 = new int[5];
     PointsPlayer p = new PointsPlayer();
     public Escape(){
         Board b = new Board(5, 25);
@@ -40,6 +40,7 @@ public class Escape {
             if(points>top5[i]){
                 top5[i]=points;
                 System.out.println(Colors.GREEN + "!!!!!!!New High Score!!!!!!");
+                i = 5;
             }
         }
     }

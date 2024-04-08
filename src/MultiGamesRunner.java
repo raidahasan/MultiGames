@@ -15,8 +15,8 @@ public class MultiGamesRunner {
 
         while (!option.equals("x")) {
             if (option.equals("1")) {
-                EscapeLimited esc = new EscapeLimited();
-                esc.run();
+                EscapeMenu esc = new EscapeMenu();
+                esc.runner();
                 System.out.println();
                 System.out.print("Which game would you like to play next? (x to quit): ");
                 option = scan.nextLine();
