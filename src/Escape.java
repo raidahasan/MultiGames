@@ -12,10 +12,16 @@ public class Escape {
     private int points = 0;
     private int row;
     private int col;
+    private int[] top5 = new int[5];
     PointsPlayer p = new PointsPlayer();
     public Escape(){
         Board b = new Board(5, 25);
         board = b.getBoard();
+        for(int i = 0; i<b.getHeight(); i++){
+            for(int j = 0; j<b.getLength(); j++){
+                board[i][j]= new Space("_");
+            }
+        }
         p = new PointsPlayer();
         hit = false;
         board[3][1] = p;
@@ -30,6 +36,12 @@ public class Escape {
             playerTurn();
         }
         printEsc();
+        for(int i = 0; i<=4; i++){
+            if(points>top5[i]){
+                top5[i]=points;
+                System.out.println(Colors.GREEN + "!!!!!!!New High Score!!!!!!");
+            }
+        }
     }
 
     public int getPoints(){
@@ -40,6 +52,7 @@ public class Escape {
         return hit;
     }
 
+    public int[] getTop5(){ return top5; }
     public void insertObstacle(Obstacle obstacle){
         obstacle.setColumn(24);  //((int)(Math.random()*3)+22)
         obstacle.setRow((int)(Math.random()*5));

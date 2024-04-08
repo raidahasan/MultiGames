@@ -31,6 +31,10 @@ public class MultiGamesRunner {
                 System.out.println();
                 System.out.print("Which game would you like to play next? (x to quit): ");
                 option = scan.nextLine();
+            }else if(option.equals("x")){
+                break;
+            }else{
+                option = scan.nextLine();
             }
         }
     }
